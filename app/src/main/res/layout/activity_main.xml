@@ -4,25 +4,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".MainActivity2"/>
-=======
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/angry_btn"
-
-        android:layout_width="269dp"
-        android:layout_height="112dp"
-
-        android:background="@drawable/button_settings"
-        android:text="Settings"
-        android:textColor="#f4f1d6"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> 0cb8d3ca63a88eb4dc28369fcaf4042f5a58d413
