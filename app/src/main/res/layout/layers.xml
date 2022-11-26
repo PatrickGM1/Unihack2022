@@ -13,9 +13,87 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!-- A set of test checkboxes. -->
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/map"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="visible"
+        tools:visibility="visible"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <Spinner
+                android:id="@+id/layers_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <CheckBox
+                android:id="@+id/traffic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onTrafficToggled"
+                android:text="@string/traffic" />
+
+            <CheckBox
+                android:id="@+id/my_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:onClick="onMyLocationToggled"
+                android:text="@string/my_location" />
+
+            <CheckBox
+                android:id="@+id/buildings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:onClick="onBuildingsToggled"
+                android:text="@string/buildings" />
+
+            <CheckBox
+                android:id="@+id/indoor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:onClick="onIndoorToggled"
+                android:text="@string/indoor" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="120dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:background="#D00E0E0E"
+            android:text="Layers"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:visibility="visible"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+</RelativeLayout>
