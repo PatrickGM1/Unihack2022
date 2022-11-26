@@ -12,19 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unihack"
         tools:targetApi="31">
-        <activity
-<<<<<<< HEAD
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-=======
-            android:name=".MapActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
->>>>>>> ea80adcadead0d28e75be0ffd6caf63f50127603
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
