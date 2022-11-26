@@ -14,11 +14,34 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_margin="12dp"
-        app:cardCornerRadius="20dp"
+        android:layout_width="399dp"
+        android:layout_height="286dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
         app:cardBackgroundColor="#BFBFBF"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        app:cardCornerRadius="20dp"  >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ceva sa mearga ca si cum"
+            android:id="@+id/textview5"
+            android:textSize="27dp"
+            ></TextView>
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/streetviewpanorama"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="com.google.android.gms.maps.SupportStreetViewPanoramaFragment" />
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
