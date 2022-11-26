@@ -39,6 +39,30 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends AppCompatActivity {
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    private GoogleMap mMap, map;
+
+    private CheckBox mTrafficCheckbox;
+
+    private CheckBox mMyLocationCheckbox;
+
+    private CheckBox mBuildingsCheckbox;
+
+    private CheckBox mIndoorCheckbox;
+
+    private Spinner mSpinner;
+
+    private Button button;
+
+    private LinearLayout linearLayout;
+
+
+    int pressed = 1;
+
+    private boolean mShowPermissionDeniedDialog = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
