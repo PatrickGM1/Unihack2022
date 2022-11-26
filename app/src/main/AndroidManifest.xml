@@ -36,6 +36,9 @@
         <activity
             android:name=".MapActivity"
             android:exported="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDTxM2RzyQy2F69jMMq7gczYr4sUnjZFs8" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
