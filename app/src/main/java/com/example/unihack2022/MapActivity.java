@@ -1,84 +1,69 @@
 package com.example.unihack2022;
 
-import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_HYBRID;
-import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NONE;
-import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
-import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
-import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_TERRAIN;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
-import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
-import com.google.android.gms.maps.model.LatLng;
 
-
-
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback  {
-
-    CardView cardView;
-
-    static final LatLng HAMBURG = new LatLng(45.76138917716781, 21.232814374031086);
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+    private final int ZOOM_LEVEL = 18;
+    private final int ANIMATION_DURATION_MILISECONDS = 2000;
 
     private GoogleMap mMap;
-
-    int pressed = 1;
-
+    private DatabaseReference mDatabase;
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
+    Button scan, meniu, shop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Retrieve the content view that renders the map.
-        setContentView(R.layout.activity_map);
+        //setContentView(R.layout.activity_maps);
+        scan = (Button)findViewById(R.id.button6) ;
+        meniu=(Button)findViewById(R.id.profile);
+        shop = (Button)findViewById(R.id.shop);
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        reference =FirebaseDatabase.getInstance().getReference("Users");
+        userID=user.getUid();
+        final TextView showname = (TextView) findViewById(R.id.textView2);
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userprofile = snapshot.getValue(User.class);
+                if(userprofile!=null){
+                    String fullname  = userprofile.name;
+                    String email = userprofile.email;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        cardView = findViewById(R.id.cardView);
-
-
-
-
-
-
-
-
-
-
-        // Get the SupportMapFragment and request notification when the map is ready to be used.
+            }
+        });
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -89,25 +74,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                if (pressed == 1) {
-                    cardView.setVisibility(View.GONE);
-                    pressed = 0;
-                } else if (pressed == 0) {
-                    cardView.setVisibility(View.VISIBLE);
-                    pressed = 1;
-                }
+            public boolean onMarkerClick(Marker marker) {
+                // Ask the user to collect the garbage - get the scanner window - if it's good the marker goes off
+                //System.out.println(marker.getPosition());
                 return false;
             }
         });
-        mMap.addMarker(new MarkerOptions()
-                .position(HAMBURG)
-        );
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(HAMBURG));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG,13));
+        mDatabase = FirebaseDatabase.getInstance().getReference("GarbageMarkers");
+        // Add a marker in Sydney and move the camera
+        LatLng startingPoint = new LatLng(45.7568755, 21.2286756);
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startingPoint, ZOOM_LEVEL),ANIMATION_DURATION_MILISECONDS, null);
     }
-    private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
+    //lol
 
 }
-
-

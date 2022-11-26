@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyCDxt8IxjcUehnOKcX0YzY24y9os5K3JS8" />
-
 
     <application
         android:allowBackup="true"
@@ -18,8 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unihack2022"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".test"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MapActivity"
+            android:exported="false"
+            android:label="@string/title_activity_map"
+            android:theme="@style/Theme.Unihack2022.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".PassFG"
             android:exported="false">
@@ -41,20 +49,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".MapActivity"
-            android:exported="false" >
-
-            <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyCDxt8IxjcUehnOKcX0YzY24y9os5K3JS8" />
-        </activity>
-
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDTxM2RzyQy2F69jMMq7gczYr4sUnjZFs8" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
